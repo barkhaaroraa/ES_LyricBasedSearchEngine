@@ -2,6 +2,34 @@
     "configurations": [
         {
             "type": "java",
+            "name": "ElasticSearchOperations",
+            "request": "launch",
+            "mainClass": "ElasticSearchOperations.ElasticSearchOperations",
+            "projectName": "my-app"
+        },
+        {
+            "type": "java",
+            "name": "ElasticsearchConnection",
+            "request": "launch",
+            "mainClass": "ElasticSearchExample.ElasticsearchConnection",
+            "projectName": "my-app"
+        },
+        {
+            "type": "java",
+            "name": "ElasticsearchInsertExample",
+            "request": "launch",
+            "mainClass": "ElasticSearchExample.ElasticsearchInsertExample",
+            "projectName": "my-app"
+        },
+        {
+            "type": "java",
+            "name": "ElasticsearchDataInsertion",
+            "request": "launch",
+            "mainClass": "ElasticSearchExample.ElasticsearchDataInsertion",
+            "projectName": "my-app"
+        },
+        {
+            "type": "java",
             "name": "CSVtoJSON",
             "request": "launch",
             "mainClass": "CSVtoJSON.CSVtoJSON",
