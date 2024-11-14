@@ -33,7 +33,7 @@ public class ElasticSearchOperations {
 
     public static void main(String[] args) {
         String serverUrl = "http://localhost:9200";  // Your Elasticsearch server URL
-        String apiKey = "api key";  // Replace with your generated API key
+        String apiKey = "api-key";  // Replace with your generated API key
 
       
         String filePath = "/home/barkha/gh-dev/elasticsearch_minor/data/LyricData.json";

@@ -4,7 +4,7 @@ package ElasticSearchOperations;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-class Songs {
+public class Songs {
     private String track_album_name;
     private String playlist_genre;
     private String playlist_subgenre;
