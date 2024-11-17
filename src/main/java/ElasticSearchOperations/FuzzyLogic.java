@@ -4,52 +4,61 @@ import co.elastic.clients.elasticsearch.ElasticsearchClient;
 import co.elastic.clients.elasticsearch.core.SearchRequest;
 import co.elastic.clients.elasticsearch.core.SearchResponse;
 import co.elastic.clients.elasticsearch.core.search.Hit;
+import co.elastic.clients.elasticsearch._types.SortOrder;
+
 import java.io.IOException;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Scanner;
 import java.util.Set;
 
-import ElasticSearchOperations.Songs;
-
-public class Search {
+public class FuzzyLogic {
 
     private final ElasticsearchClient esClient;
 
-    public Search (ElasticsearchClient client) {
+    public FuzzyLogic(ElasticsearchClient client) {
         this.esClient = client;
     }
 
-    public void searchSongByLyrics(String lyrics) {
-        // Take user input for the lyrics to search
-        
+    // Method to perform a fuzzy search on phrases with typos and return only unique top 10 results
+    public void searchWithFuzziness(String input) {
         try {
+            // Validate input
+            if (input == null || input.isEmpty()) {
+                System.err.println("Input for fuzzy search is empty. Please provide valid input.");
+                return;
+            }
+
             // Build the search request
             SearchRequest request = SearchRequest.of(s -> s
-                .index("songs")  // The index name
+                .index("songs") // Ensure this matches your index name
                 .query(q -> q
                     .match(m -> m
-                        .field("lyrics")
-                        .query(lyrics)
+                        .field("lyrics")     // Field to search
+                        .query(input)        // User input (phrase)
+                        .fuzziness("AUTO")   // Set fuzziness for typos
                     )
                 )
-                .size(100)  // Limit to the top 10 results
+                .size(100) // Retrieve up to 100 results (more than we need)
+                .sort(sort -> sort
+                    .field(f -> f
+                        .field("_score")    // Sort by relevance score
+                        .order(SortOrder.Desc) // Sort descending by score
+                    )
+                )
             );
 
             // Execute the search request
             SearchResponse<Songs> response = esClient.search(request, Songs.class);
 
-            // Display results
-            List<Hit<Songs>> hits = response.hits().hits();
+            // Create a Set to ensure uniqueness based on lyrics
             Set<String> uniqueLyrics = new HashSet<>();
-            int count=0;
+            List<Hit<Songs>> hits = response.hits().hits();
 
-            
             if (hits.isEmpty()) {
-                System.out.println("No songs found for the given lyrics.");
-            } 
-            else {
-                System.out.println("Top 10 search results:");
+                System.out.println("No songs found for the given phrase with typos: " + input);
+            } else {
+                System.out.println("Top 10 fuzzy phrase search results (Unique):");
+                int count = 0;
                 for (Hit<Songs> hit : hits) {
                     Songs song = hit.source();
                     if (song != null) {
@@ -60,17 +69,14 @@ public class Search {
                                     song.getTrack_artist());
                             count++;
                         }
-                        if (count >= 10) break; // Stop once we have 10 unique results
-                    } 
-                    else {
+                        if (count > 10) break; // Stop once we have 10 unique results
+                    } else {
                         System.err.println("Hit without source data. Skipping...");
                     }
                 }
             }
         } catch (IOException e) {
-            System.err.println("Error executing search: " + e.getMessage());
+            System.err.println("Error executing fuzzy phrase search: " + e.getMessage());
         }
     }
-
 }
-

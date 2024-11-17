@@ -1,4 +1,5 @@
 ElasticSearchOperations/Search.class
 ElasticSearchOperations/Songs.class
 Main/Main.class
+ElasticSearchOperations/FuzzyLogic.class
 ElasticSearchOperations/ElasticSearchOperations.class

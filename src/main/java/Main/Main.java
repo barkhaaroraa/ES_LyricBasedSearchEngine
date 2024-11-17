@@ -1,6 +1,7 @@
 package Main;
 
 import ElasticSearchOperations.ElasticSearchOperations;
+import ElasticSearchOperations.FuzzyLogic;
 import ElasticSearchOperations.Search;
 import ElasticSearchOperations.Songs;
 
@@ -10,6 +11,9 @@ import co.elastic.clients.json.jackson.JacksonJsonpMapper;
 import org.apache.http.HttpHost;
 import org.apache.http.message.BasicHeader;
 import org.elasticsearch.client.RestClient;
+
+import java.util.Scanner;
+
 import org.apache.http.Header;
 
 public class Main {
@@ -36,9 +40,15 @@ public class Main {
 
             // 4. Create an instance of Search, passing in the ElasticsearchClient
             Search search = new Search(esClient);
+            FuzzyLogic fuzzysearch= new FuzzyLogic(esClient);
+            Scanner scanner = new Scanner(System.in);
+            System.out.print("Enter song lyrics to search: ");
+            String lyrics = scanner.nextLine();
+
 
             // 5. Call the searchSongByLyrics method to search based on user input
-            search.searchSongByLyrics();
+            search.searchSongByLyrics(lyrics);
+            fuzzysearch.searchWithFuzziness(lyrics);
 
             // Close the transport when done
             transport.close();
