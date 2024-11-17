@@ -1,4 +1,6 @@
-ElasticSearchOperations/Search.class
-ElasticSearchOperations/Songs.class
-Main/Main.class
-ElasticSearchOperations/ElasticSearchOperations.class
+SpeechToText\AudioRecorder.class
+Main\Main.class
+ElasticSearchOperations\ElasticSearchOperations.class
+SpeechToText\SpeechToText.class
+ElasticSearchOperations\Search.class
+ElasticSearchOperations\Songs.class

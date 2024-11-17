@@ -1,4 +1,8 @@
 {
     "java.configuration.updateBuildConfiguration": "interactive",
-    "java.compile.nullAnalysis.mode": "automatic"
+    "java.compile.nullAnalysis.mode": "automatic",
+    "terminal.integrated.env.windows": {
+        "GOOGLE_APPLICATION_CREDENTIALS": "C:\\Users\\diyaa\\Downloads\\delta-vector-442009-e8-f0bce06fde3a.json",
+        "PATH": "C:\\MinGW\\mingw32\\bin;C:\\Program Files\\nodejs;${env:Path}"
+    }
 }

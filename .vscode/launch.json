@@ -2,6 +2,20 @@
     "configurations": [
         {
             "type": "java",
+            "name": "SpeechToText",
+            "request": "launch",
+            "mainClass": "SpeechToText.SpeechToText",
+            "projectName": "my-app"
+        },
+        {
+            "type": "java",
+            "name": "AudioRecorder",
+            "request": "launch",
+            "mainClass": "SpeechToText.AudioRecorder",
+            "projectName": "my-app"
+        },
+        {
+            "type": "java",
             "name": "Main",
             "request": "launch",
             "mainClass": "Main.Main",
