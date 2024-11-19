@@ -54,7 +54,7 @@ public class AudioRecorder {
             line.close();
             System.out.println("Recording stopped.");
             SpeechToText speech = new SpeechToText();
-            speech.speechtotext("C:\\Users\\diyaa\\gh-repo\\elasticsearch_minor\\recorded_audio.wav");
+            speech.main(args);;
 
         } catch (LineUnavailableException | IOException e) {
             e.printStackTrace();

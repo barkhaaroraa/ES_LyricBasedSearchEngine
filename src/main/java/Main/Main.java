@@ -1,26 +1,27 @@
 package Main;
-
+import Jaccard.JaccardSimilarity;
+import TFIDF.TFIDFReranker;
+import java.util.*;
+import java.util.stream.Collectors;
 import ElasticSearchOperations.ElasticSearchOperations;
 import ElasticSearchOperations.FuzzyLogic;
 import ElasticSearchOperations.Search;
 import ElasticSearchOperations.Songs;
-
+import Ranking.Ranking;
+import Ranking.SongSimilarity;
 import co.elastic.clients.elasticsearch.ElasticsearchClient;
 import co.elastic.clients.transport.rest_client.RestClientTransport;
 import co.elastic.clients.json.jackson.JacksonJsonpMapper;
 import org.apache.http.HttpHost;
 import org.apache.http.message.BasicHeader;
 import org.elasticsearch.client.RestClient;
-
-import java.util.Scanner;
-
 import org.apache.http.Header;
 
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String lyrics) {
         String serverUrl = "http://localhost:9200";  // Your Elasticsearch server URL
-        String apiKey = "api-key";
+        String apiKey = "cWxsVUtaTUJJaGRVRVROODBfdjM6Y3lJTlptS2lUMTZ3bFJROUh4TmhsUQ==";
         try {
             // 1. Create the low-level RestClient with API Key in the header
             RestClient lowLevelRestClient = RestClient.builder(
@@ -41,14 +42,29 @@ public class Main {
             // 4. Create an instance of Search, passing in the ElasticsearchClient
             Search search = new Search(esClient);
             FuzzyLogic fuzzysearch= new FuzzyLogic(esClient);
-            Scanner scanner = new Scanner(System.in);
-            System.out.print("Enter song lyrics to search: ");
-            String lyrics = scanner.nextLine();
 
 
             // 5. Call the searchSongByLyrics method to search based on user input
-            search.searchSongByLyrics(lyrics);
-            fuzzysearch.searchWithFuzziness(lyrics);
+            List<Songs> exactMatch=search.searchSongByLyrics(lyrics);
+            List<Songs> fuzzyMatch=fuzzysearch.searchWithFuzziness(lyrics);
+            List<Songs> combined = new ArrayList<>();
+
+        // Add all exact match songs to the combined list
+            combined.addAll(exactMatch);
+
+            // Add only unique fuzzy match songs to the combined list (avoiding duplicates)
+            for (Songs song : fuzzyMatch) {
+                if (!combined.contains(song)) {
+                    combined.add(song);
+                }
+            }
+            System.out.println("ranking initiated");
+            Ranking newRanks=new Ranking();
+            List<SongSimilarity>topSongs=newRanks.calculatingResults(combined, lyrics);    
+            for (int i = 0; i < topSongs.size(); i++) {
+                SongSimilarity song = topSongs.get(i);
+                System.out.printf("%d. Song: %s | Score: %.2f%n", (i + 1), song.getTrackName(), song.getScore());
+            } 
 
             // Close the transport when done
             transport.close();

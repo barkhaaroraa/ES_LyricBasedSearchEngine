@@ -6,9 +6,10 @@ import com.google.cloud.speech.v1.RecognizeRequest;
 import com.google.cloud.speech.v1.RecognizeResponse;
 import com.google.cloud.speech.v1.SpeechClient;
 import com.google.cloud.speech.v1.RecognitionConfig.AudioEncoding;
-
+import Main.Main;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.io.IOException;
 
 public class SpeechToText {
 
@@ -18,13 +19,20 @@ public class SpeechToText {
         StringBuilder transcription = new StringBuilder(); // Store the transcription result
 
         try {
+            // Get the credentials path from the environment variable
+            String credentialsPath = System.getenv("GOOGLE_APPLICATION_CREDENTIALS");
+
+            if (credentialsPath == null || credentialsPath.isEmpty()) {
+                throw new IllegalStateException("GOOGLE_APPLICATION_CREDENTIALS environment variable is not set.");
+            }
+
             // Set the path to your audio file
             String audioFilePath = path;
 
             // Read the audio file into a byte array
             byte[] audioBytes = Files.readAllBytes(Paths.get(audioFilePath));
 
-            // Initialize the client
+            // Initialize the client (credentials will automatically be picked up from the environment variable)
             try (SpeechClient speechClient = SpeechClient.create()) {
                 // Configure recognition settings
                 RecognitionConfig config = RecognitionConfig.newBuilder()
@@ -56,11 +64,26 @@ public class SpeechToText {
                     transcription.append(transcript);
                 });
             }
+        } catch (IOException e) {
+            System.out.println("Error reading the audio file: " + e.getMessage());
         } catch (Exception e) {
             e.printStackTrace();
         }
 
         // Return the transcription as a space-separated string
         return transcription.toString().trim(); // Trim to remove any leading or trailing spaces
+    }
+
+    public static void main(String[] args) {
+        // System.err.println("enter");
+        SpeechToText stt = new SpeechToText();
+
+        // Replace this with the path to your audio file
+        String audioFilePath = "/home/barkha/gh-dev/elasticsearch_minor/recorded_audio.wav";
+
+        String result = stt.speechtotext(audioFilePath);
+        System.out.println(result);
+        Main searching=new Main();
+        searching.main(result);
     }
 }

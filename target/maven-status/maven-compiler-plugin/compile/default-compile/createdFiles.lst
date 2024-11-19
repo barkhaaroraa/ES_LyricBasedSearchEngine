@@ -1,5 +1,9 @@
-ElasticSearchOperations/Search.class
 ElasticSearchOperations/Songs.class
 Main/Main.class
-ElasticSearchOperations/FuzzyLogic.class
 ElasticSearchOperations/ElasticSearchOperations.class
+Ranking/TFIDFReranker$Document.class
+ElasticSearchOperations/Search.class
+Jaccard/JaccardSimilarity.class
+Ranking/TFIDFReranker$1.class
+Ranking/TFIDFReranker.class
+ElasticSearchOperations/FuzzyLogic.class

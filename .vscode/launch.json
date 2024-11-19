@@ -2,6 +2,34 @@
     "configurations": [
         {
             "type": "java",
+            "name": "TFIDFReranker",
+            "request": "launch",
+            "mainClass": "TFIDF.TFIDFReranker",
+            "projectName": "my-app"
+        },
+        {
+            "type": "java",
+            "name": "SpeechToText",
+            "request": "launch",
+            "mainClass": "SpeechToText.SpeechToText",
+            "projectName": "my-app"
+        },
+        {
+            "type": "java",
+            "name": "AudioRecorder",
+            "request": "launch",
+            "mainClass": "SpeechToText.AudioRecorder",
+            "projectName": "my-app"
+        },
+        {
+            "type": "java",
+            "name": "Ranking",
+            "request": "launch",
+            "mainClass": "Ranking.Ranking",
+            "projectName": "my-app"
+        },
+        {
+            "type": "java",
             "name": "Main",
             "request": "launch",
             "mainClass": "Main.Main",
