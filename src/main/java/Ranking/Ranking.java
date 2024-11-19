@@ -51,7 +51,7 @@ public class Ranking {
             double tfidf_score = tfidfScore.calculateTFIDFAndCosineSimilarity(song, lyrics);
 
             // Combine scores (custom weighted scoring logic)
-            double score = j_score * 3 + tfidf_score * 2;
+            double score = j_score * 5 + tfidf_score * 3;
 
             // Create a SongSimilarity object
             SongSimilarity songSimilarity = new SongSimilarity(song.getTrack_name(), song.getTrack_artist(), score);
