@@ -5,7 +5,6 @@ import java.util.*;
 import ElasticSearchOperations.Songs;
 import Jaccard.JaccardSimilarity;
 import TFIDF.TFIDFReranker;
-import Ranking.SongSimilarity;
 
 public class Ranking {
 

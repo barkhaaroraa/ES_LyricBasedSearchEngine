@@ -1,9 +1,6 @@
 package Main;
-import Jaccard.JaccardSimilarity;
-import TFIDF.TFIDFReranker;
+
 import java.util.*;
-import java.util.stream.Collectors;
-import ElasticSearchOperations.ElasticSearchOperations;
 import ElasticSearchOperations.FuzzyLogic;
 import ElasticSearchOperations.Search;
 import ElasticSearchOperations.Songs;
@@ -21,7 +18,7 @@ public class Main {
 
     public static void main(String lyrics) {
         String serverUrl = "http://localhost:9200";  // Your Elasticsearch server URL
-        String apiKey = "cWxsVUtaTUJJaGRVRVROODBfdjM6Y3lJTlptS2lUMTZ3bFJROUh4TmhsUQ==";
+        String apiKey = "api-key";
         try {
             // 1. Create the low-level RestClient with API Key in the header
             RestClient lowLevelRestClient = RestClient.builder(

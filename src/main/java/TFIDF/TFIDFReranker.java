@@ -1,7 +1,6 @@
 package TFIDF;
 import java.util.*;
-import java.util.stream.Collectors;
-import ElasticSearchOperations.ElasticSearchOperations;
+
 import ElasticSearchOperations.Songs;
 
 public class TFIDFReranker {

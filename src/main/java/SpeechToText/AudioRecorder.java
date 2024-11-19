@@ -3,7 +3,6 @@ package SpeechToText;
 import javax.sound.sampled.*;
 import java.io.File;
 import java.io.IOException;
-import SpeechToText.SpeechToText;
 
 public class AudioRecorder {
     // Specify the audio format for the recording
