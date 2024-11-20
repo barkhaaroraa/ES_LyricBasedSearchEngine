@@ -1,0 +1,38 @@
+/* Root variables for consistent styling */
+:root {
+    --background-dark: #0d0d0d;
+    --background-gradient: linear-gradient(135deg, #2d003a, #0d0d0d);
+    --text-light: #ffffff;
+    --text-gray: #cccccc;
+    --accent-pink: #ff007a;
+    --accent-blue: #00cfff;
+  }
+  
+  /* Global Reset */
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: 'Poppins', sans-serif;
+    background: var(--background-dark);
+    color: var(--text-light);
+    line-height: 1.6;
+  }
+  
+  a {
+    text-decoration: none;
+    color: var(--accent-pink);
+    transition: color 0.3s ease;
+  }
+  
+  a:hover {
+    color: var(--accent-blue);
+  }
+  
+  button {
+    cursor: pointer;
+  }
+  
