@@ -18,7 +18,7 @@ public class Main {
 
     public static void main(String lyrics) {
         String serverUrl = "http://localhost:9200";  // Your Elasticsearch server URL
-        String apiKey = "api-key";
+        String apiKey = "aVlNRVRwTUIwSlEwVFg0OXUzc3c6NzJTRmpjRlVRZ1NWbF9PSk5KT2k2Zw==";
         try {
             // 1. Create the low-level RestClient with API Key in the header
             RestClient lowLevelRestClient = RestClient.builder(

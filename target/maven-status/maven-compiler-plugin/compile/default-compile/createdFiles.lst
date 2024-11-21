@@ -1,9 +1,11 @@
+SpeechToText/AudioRecorder.class
 ElasticSearchOperations/Songs.class
 Main/Main.class
+Ranking/SongSimilarity.class
+SpeechToText/SpeechToText.class
+Ranking/Ranking.class
 ElasticSearchOperations/ElasticSearchOperations.class
-Ranking/TFIDFReranker$Document.class
+TFIDF/TFIDFReranker.class
 ElasticSearchOperations/Search.class
 Jaccard/JaccardSimilarity.class
-Ranking/TFIDFReranker$1.class
-Ranking/TFIDFReranker.class
 ElasticSearchOperations/FuzzyLogic.class
